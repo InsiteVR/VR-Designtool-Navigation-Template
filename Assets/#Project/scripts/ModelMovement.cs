@@ -10,55 +10,55 @@ public class ModelMovement : MonoBehaviour {
     public VRTK_ControllerEvents rightController;
     public Transform model;
 
-    private Vector3 L;
-    private Vector3 R;
-    private Vector3 prevL;
-    private Vector3 prevR;
+    private Vector3 leftPos;
+    private Vector3 rightPos;
+    private Vector3 leftPosPrev;
+    private Vector3 rightPosPrev;
 
 	void Update () {
-        L = leftController.transform.position;
-        R = rightController.transform.position;
+        leftPos = leftController.transform.position;
+        rightPos = rightController.transform.position;
 
         if (leftController.gripPressed ^ rightController.gripPressed) {
             OneHandDrag();
         }
-
+         
         if(leftController.gripPressed && rightController.gripPressed){
             TwoHandDrag();
             Rotate();
             Scale();
         }
 
-        prevL = leftController.transform.position;
-        prevR = rightController.transform.position;
+        leftPosPrev = leftController.transform.position;
+        rightPosPrev = rightController.transform.position;
     }
 
     private void OneHandDrag() {
         if(leftController.gripPressed) {
-            Translate(L, prevL);
+            Translate(leftPos, leftPosPrev);
         } else {
-            Translate(R, prevR);
+            Translate(rightPos, rightPosPrev);
         }
     }
 
     private void TwoHandDrag() {
         Vector3 pos = (leftController.transform.position + rightController.transform.position) / 2f;
-        Vector3 prevPos = (prevL + prevR) / 2f;
+        Vector3 prevPos = (leftPosPrev + rightPosPrev) / 2f;
         Translate(pos, prevPos);
     }
 
     private void Translate(Vector3 pos, Vector3 prevPos) {
         Vector3 distance = pos - prevPos;
-        model.Translate(distance, Space.World);
+        model.Translate(distance);
     }
 
     private void Rotate() {
-        //project on XZ plane to restric rotation to horizontal rotation
-        Vector3 pos = Vector3.ProjectOnPlane(R - L, Vector3.up);
-        Vector3 prevPos = Vector3.ProjectOnPlane(prevR - prevL, Vector3.up);
+        //project on XZ plane to restric rotation to flat table
+        Vector3 pos = Vector3.ProjectOnPlane(rightPos - leftPos, Vector3.up);
+        Vector3 prevPos = Vector3.ProjectOnPlane(rightPosPrev - leftPosPrev, Vector3.up);
 
         //center of first hand pos
-        Vector3 center = (L + R) / 2f;
+        Vector3 center = (leftPos + rightPos) / 2f;
 
         //rotate around center 
         float angle = Vector3.Angle(pos, prevPos);
@@ -71,11 +71,11 @@ public class ModelMovement : MonoBehaviour {
     }
 
     private void Scale() {
-        float dist = Vector3.Distance(L, R);
-        float prevDist = Vector3.Distance(prevL, prevR);
+        float dist = Vector3.Distance(leftPos, rightPos);
+        float prevDist = Vector3.Distance(leftPosPrev, rightPosPrev);
         float scaleFactor = dist / prevDist;
 
-        Vector3 midPosPreScale = (R + L) / 2f;
+        Vector3 midPosPreScale = (rightPos + leftPos) / 2f;
         Vector3 midPosLocal = model.InverseTransformPoint(midPosPreScale);
 
         model.localScale *= scaleFactor;
