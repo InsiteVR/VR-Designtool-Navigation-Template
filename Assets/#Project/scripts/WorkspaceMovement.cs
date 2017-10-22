@@ -16,6 +16,7 @@ public class WorkspaceMovement : MonoBehaviour {
     private Vector3 rightPosPrev;
 
 	void Update () {
+        //current position of controllers
         leftPos = leftController.transform.position;
         rightPos = rightController.transform.position;
 
@@ -29,6 +30,7 @@ public class WorkspaceMovement : MonoBehaviour {
             Scale();
         }
 
+        //previous position of controllers, to be used in the next frame
         leftPosPrev = leftController.transform.position;
         rightPosPrev = rightController.transform.position;
     }

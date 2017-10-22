@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftController: {fileID: 811261293}
   rightController: {fileID: 2097049456}
-  model: {fileID: 1284305639}
+  workspace: {fileID: 0}
 --- !u!1 &1330201656
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 1330201656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.63, z: 0.436}
-  m_LocalScale: {x: 0.37289554, y: 0.37289548, z: 0.37289548}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children: []
   m_Father: {fileID: 1284305639}
   m_RootOrder: 0
