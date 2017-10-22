@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftController: {fileID: 811261293}
   rightController: {fileID: 2097049456}
-  workspace: {fileID: 0}
+  workspace: {fileID: 1284305639}
 --- !u!1 &1330201656
 GameObject:
   m_ObjectHideFlags: 0
