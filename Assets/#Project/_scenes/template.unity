@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 1284305639}
   - component: {fileID: 1284305640}
   m_Layer: 0
-  m_Name: Model
+  m_Name: Workspace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
