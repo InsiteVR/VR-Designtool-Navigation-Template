@@ -34,9 +34,9 @@ public class WorkspaceMovement : MonoBehaviour {
 
     private void OneHandDrag() {
         if(leftController.gripPressed) {
-            Translate(leftPos, leftPosPrev);
+            Translate(leftPosPrev, leftPos);
         } else {
-            Translate(rightPos, rightPosPrev);
+            Translate(rightPosPrev, rightPos);
         }
     }
 
@@ -44,7 +44,7 @@ public class WorkspaceMovement : MonoBehaviour {
         //get middle position of hands
         Vector3 pos = (leftPos + rightPos) / 2f;
         Vector3 prevPos = (leftPosPrev + rightPosPrev) / 2f;
-        Translate(pos, prevPos);
+        Translate(prevPos, pos);
     }
 
     private void Translate(Vector3 prevPos, Vector3 pos) {
@@ -87,7 +87,7 @@ public class WorkspaceMovement : MonoBehaviour {
 
         //convert local position back to global and perform corrective translation
         Vector3 midPosPostScale = workspace.TransformPoint(midPosLocal);
-        Translate(midPosPreScale, midPosPostScale);
+        Translate(midPosPostScale, midPosPreScale);
     }
 
 }
