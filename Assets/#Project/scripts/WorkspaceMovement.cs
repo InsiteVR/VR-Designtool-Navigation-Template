@@ -47,7 +47,7 @@ public class WorkspaceMovement : MonoBehaviour {
         Translate(pos, prevPos);
     }
 
-    private void Translate(Vector3 pos, Vector3 prevPos) {
+    private void Translate(Vector3 prevPos, Vector3 pos) {
         Vector3 distance = pos - prevPos;
         workspace.Translate(distance, Space.World);
     }
