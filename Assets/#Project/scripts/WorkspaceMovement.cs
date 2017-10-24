@@ -40,16 +40,16 @@ public class WorkspaceMovement : MonoBehaviour {
         }
     }
 
-    private void TwoHandDrag() {
-        //get middle position of hands
-        Vector3 pos = (leftPos + rightPos) / 2f;
-        Vector3 prevPos = (leftPosPrev + rightPosPrev) / 2f;
-        Translate(prevPos, pos);
+    private void Translate(Vector3 startPos, Vector3 endPos) {
+        Vector3 distance = endPos - startPos;
+        workspace.Translate(distance, Space.World);
     }
 
-    private void Translate(Vector3 prevPos, Vector3 pos) {
-        Vector3 distance = pos - prevPos;
-        workspace.Translate(distance, Space.World);
+    private void TwoHandDrag() {
+        //get middle position of hands
+        Vector3 midPos = (leftPos + rightPos) / 2f;
+        Vector3 prevMidPos = (leftPosPrev + rightPosPrev) / 2f;
+        Translate(prevMidPos, midPos);
     }
 
     private void Rotate() {
@@ -60,8 +60,9 @@ public class WorkspaceMovement : MonoBehaviour {
         //center of hand pos
         Vector3 center = (leftPos + rightPos) / 2f;
 
-        //rotate around center 
         float angle = Vector3.Angle(dir, prevDir);
+
+        //calculate sign of rotation
         Vector3 cross = Vector3.Cross(dir, prevDir);
         float dot = Vector3.Dot(cross, Vector3.down);
         float sign = Mathf.Sign(dot);
