@@ -40,16 +40,16 @@ public class WorkspaceMovement : MonoBehaviour {
         }
     }
 
-    private void Translate(Vector3 startPos, Vector3 endPos) {
-        Vector3 distance = endPos - startPos;
-        workspace.Translate(distance, Space.World);
-    }
-
     private void TwoHandDrag() {
         //get middle position of hands
         Vector3 midPos = (leftPos + rightPos) / 2f;
         Vector3 prevMidPos = (leftPosPrev + rightPosPrev) / 2f;
         Translate(prevMidPos, midPos);
+    }
+
+    private void Translate(Vector3 startPos, Vector3 endPos) {
+        Vector3 distance = endPos - startPos;
+        workspace.Translate(distance, Space.World);
     }
 
     private void Rotate() {
@@ -80,7 +80,7 @@ public class WorkspaceMovement : MonoBehaviour {
         float scaleFactor = dist / prevDist;
 
         //convert middle position of hands from global to local space
-        Vector3 midPosPreScale = (rightPos + leftPos) / 2f;
+        Vector3 midPosPreScale = (rightPosPrev + leftPosPrev) / 2f;
         Vector3 midPosLocal = workspace.InverseTransformPoint(midPosPreScale);
 
         //apply scale to model
