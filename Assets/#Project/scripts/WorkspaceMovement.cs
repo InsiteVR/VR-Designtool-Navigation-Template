@@ -62,7 +62,7 @@ public class WorkspaceMovement : MonoBehaviour {
 
         float angle = Vector3.Angle(dir, prevDir);
 
-        //calculate sign of rotation
+        //calculate direction of rotation
         Vector3 cross = Vector3.Cross(prevDir, dir);
 
         //perform rotation
