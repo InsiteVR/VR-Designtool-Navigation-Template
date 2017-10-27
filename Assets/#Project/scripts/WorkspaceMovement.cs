@@ -63,12 +63,10 @@ public class WorkspaceMovement : MonoBehaviour {
         float angle = Vector3.Angle(dir, prevDir);
 
         //calculate sign of rotation
-        Vector3 cross = Vector3.Cross(dir, prevDir);
-        float dot = Vector3.Dot(cross, Vector3.down);
-        float sign = Mathf.Sign(dot);
+        Vector3 cross = Vector3.Cross(prevDir, dir);
 
         //perform rotation
-        workspace.RotateAround(center, Vector3.up, sign * angle);
+        workspace.RotateAround(center, cross, angle);
     }
 
     private void Scale() {
